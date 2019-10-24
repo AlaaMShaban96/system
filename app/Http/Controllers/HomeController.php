@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailable;
+
 use App\Course;
+use App\Subject;
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Http\Request;
 
@@ -26,7 +31,13 @@ class HomeController extends Controller
     public function index()
     {
       
-        $courses= Course::where('t_id',auth()->id())->get();
-        return view('home',compact('courses'));
+        if (Gate::allows('Check-the-Admin')) {
+
+            $subjects = Subject::all();
+            return view('home', compact('subjects'));
+        } else {
+          return  redirect('/');
+          
+        }
     }
 }

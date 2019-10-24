@@ -1,32 +1,51 @@
-@extends('course.layout')
-@section('titel')
-    Create Course
-@endsection
+@extends('layouts.app')
 
-@section('bode')
-    <form action="course/store" method="post">
-    @method('PATCH')
-    @csrf
-    <label for="t_id">Teacher ID</label><br>
-    <input type="text" name="t_id" ><br>
+@section('content')
 
-    <div class="form-group">
 
-         <label for="t_id">Teacher ID</label>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course ID</th>
+            <th>Teacher ID</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($subject->courses as $course)
+        <tr>
+            <td>{{ $course->id }}</td>
+            <td>{{ $course->t_id }}</td>
 
-         <select multiple class="form-control" name="sbject_id" >
 
-          @foreach ($subjects as $subject)
+            <td>
+                <form action="/course/{{ $course->id }}" method="post">
 
-         <option value="{{$subject->id}}">{{$subject->name}}</option>
+                    @method('DELETE')
 
-          @endforeach
-        
-         </select>
-    </div>
+                    @csrf
 
-    <input type="submit" value="Save">
+                    <button type="submit" class="btn btn-danger">Delete</button>
 
-    </form>
-    
+                </form>
+
+            </td>
+
+            <td>
+                <form action="/course/{{ $course->id }}/edit" method="get">
+                    <button type="submit" class="btn btn-info">Edit </button>
+                </form>
+            </td>
+
+
+        </tr>
+        @endforeach
+
+    </tbody>
+</table>
+<form action="/course/{{$subject->id}}/create" method="GET">
+
+    <button type="submit" class="btn btn-success">Create Course</button>
+
+</form>
 @endsection

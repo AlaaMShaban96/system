@@ -18,7 +18,7 @@ class SubjectPolicy
      */
     public function viewAny(User $user)
     {
-        return '3'==$user->id;
+        return '3' == $user->id;
     }
 
     /**
@@ -28,9 +28,9 @@ class SubjectPolicy
      * @param  \App\Subject  $subject
      * @return mixed
      */
-    public function view(User $user, Subject $subject)
+    public function view(User $user)
     {
-        //
+        return $user->email == 'foo@foo.com';
     }
 
     /**

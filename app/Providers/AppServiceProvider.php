@@ -13,9 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
     }
-
+ 
     /**
      * Bootstrap any application services.
      *

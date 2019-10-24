@@ -11,6 +11,7 @@ class Subject extends Model
         "name"
     ];
 
+
     public function courses()
     {
         return $this->hasMany(Course::class);
@@ -19,11 +20,6 @@ class Subject extends Model
     {
 
         $this->courses()->create(compact('t_id'));
-        // return  Course::Create(
-        //             [
-        //                 'subject_id'=>$this->id,
-        //                 't_id'=>$t_id
-        //             ]
-        //             );
+                 
     }
 }
